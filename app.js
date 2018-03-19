@@ -59,6 +59,7 @@ function run(){
       seconds = 60;
       seconds_div.innerHTML = seconds;
     }
+
     // if timer is on final minute (01:00)
     if( minutes == 1 && seconds == 0 ){
       minutes = 0;
@@ -144,11 +145,17 @@ function decrement(){
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
   } else {
-    minutes_div.innerHTML = minutes;  
+    minutes_div.innerHTML = minutes;
   }
   // if timer is 00:00, disables (-) button
   if(minutes === 0 && seconds === 0){
     minus.disabled = true;
+  }
+  // if timer is 00 : (some seconds left), set seconds to zero and stop countdown
+  if(minutes === 0 && seconds < 60 && seconds > 0){
+    seconds = 0;
+    seconds_div.innerHTML = '0' + seconds;
+    clearInterval(interval);
   }
   
 }
