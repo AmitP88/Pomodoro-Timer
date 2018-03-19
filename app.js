@@ -27,16 +27,16 @@ if(seconds < 10){
 // Clicked - to increment clicks variable
 function clicked(){
   clicks++;
-  console.log("clicks:" + clicks);
+//   console.log("clicks:" + clicks);
   // check to see if number of clicks are even or odd
   if(clicks % 2 == 0)/* number of clicks is even */{
     // pauses the timer if number of clicks is even
     clearInterval(interval);
-    trigger.innerHTML = 'Start';
+    trigger.innerHTML = '&#9658;';
   } else if (Math.abs(clicks % 2) == 1)/* number of clicks is odd */{
     // calls the run function (which starts the timer) if number of clicks is odd
     run();
-    trigger.innerHTML = 'Pause';
+    trigger.innerHTML = '&#10074;&#10074;';
   } 
 }
 
@@ -81,7 +81,7 @@ function run(){
 
 // Increment - allows the user to increase the number of minutes on timer (up to 60 minutes max)
 function increment(){
-  trigger.innerHTML = 'Start';
+  trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0; 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
@@ -114,7 +114,7 @@ function increment(){
 
 // Decrement - allows the user to decrease the number of minutes (down to a minimum of 0)
 function decrement(){
-  trigger.innerHTML = 'Start';
+  trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0; 
   // re-enables the (-) button if the timer is set at 60 minutes (max time) and the (+) button is disabled
@@ -154,7 +154,7 @@ function reset_timer(){
   colon_div.innerHTML = ':';
   seconds_div.innerHTML = seconds;
   minus.disabled = false;
-  trigger.innerHTML = 'Start';
+  trigger.innerHTML = '&#9658;';
   // For display purposes, adds leading zeros if either minutes or seconds are below 10
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
