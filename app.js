@@ -71,9 +71,9 @@ function run(){
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
     if(minutes === 0 && seconds < 0){
       clearInterval(interval);
-      minutes_div.innerHTML = "time's";
+      minutes_div.innerHTML = "Time's";
       colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "up!";
+      seconds_div.innerHTML = "Up!";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
@@ -91,6 +91,11 @@ function increment(){
     minus.disabled = false;
     trigger.disabled = false;
   }
+
+  if(minutes === 0 && minus.disabled === true && trigger.disabled === false){
+    minus.disabled = false;
+  }
+
   // sets the max number of minutes available to increment up to 60 (so that the timer can only have a max number of 60 minutes - 1 hour)
   if(minutes >= 0 && minutes <= 59){
     minutes_div.innerHTML = ++minutes;
