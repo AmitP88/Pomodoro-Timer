@@ -75,6 +75,8 @@ function run(){
       colon_div.innerHTML = ' ';
       seconds_div.innerHTML = "up!";
       minus.disabled = true;
+      trigger.innerHTML = '&#9658;';
+      trigger.disabled = true;
     }
   },1000);
 }
@@ -85,8 +87,9 @@ function increment(){
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0; 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
-  if(minutes === 0 && minus.disabled === true) {
+  if(minutes === 0 && minus.disabled === true && trigger.disabled === true) {
     minus.disabled = false;
+    trigger.disabled = false;
   }
   // sets the max number of minutes available to increment up to 60 (so that the timer can only have a max number of 60 minutes - 1 hour)
   if(minutes >= 0 && minutes <= 59){
@@ -155,6 +158,7 @@ function reset_timer(){
   seconds_div.innerHTML = seconds;
   minus.disabled = false;
   trigger.innerHTML = '&#9658;';
+  trigger.disabled = false;
   // For display purposes, adds leading zeros if either minutes or seconds are below 10
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
