@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js"></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id="timer">
+    <div id="countdown">
+      <span id="minutes"></span>
+      <span id="colon">:</span>
+      <span id="seconds"></span>
+    </div>
+    <div class="buttons">
+      <button id="trigger" onclick="clicked()">Start</button>    
+      <button id="minus" onclick="decrement()">-</button>
+      <button id="add" onclick="increment()">+</button>
+      <button id="reset" onclick="reset_timer()">Reset</button>
+    </div>
+  </div>
+</body>
+</html>
