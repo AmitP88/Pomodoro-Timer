@@ -12,17 +12,17 @@
 <body>
   <div class="circle minutes-circle">
     <div class="circle seconds-circle">
-        <div id="timer">
-            <div id="countdown">
+        <div id="timer" class="timer">
+            <div id="countdown" class="countdown">
             <span id="minutes"></span>
             <span id="colon">:</span>
             <span id="seconds"></span>
             </div>
             <div class="buttons">
-            <button id="trigger" onclick="clicked()">&#9658;</button>    
-            <button id="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
-            <button id="add" onclick="increment()">&#x271a;</button>
-            <button id="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
+            <button id="trigger" class="trigger" onclick="clicked()">&#9658;</button>    
+            <button id="minus" class="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
+            <button id="add" class="add" onclick="increment()">&#x271a;</button>
+            <button id="reset" class="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
             </div>
         </div>      
     </div>      

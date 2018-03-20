@@ -7,7 +7,7 @@
 .minutes-circle {
     border-color: blue;
     height: 300px;
-    width: 300px;    
+    width: 300px;
 }
 
 .seconds-circle {
@@ -16,19 +16,19 @@
     width: 280px;
 }
 
-#timer {
+.timer {
     margin: 50px 10px 45px 15px;
 }
 
 
-#countdown {
+.countdown {
     font-family: 'Orbitron', sans-serif;
     padding: 20px;
     margin-left: 10%;
     font-size: 35px;
 }
 
-#trigger, #minus, #add, #reset {
+.trigger, .minus, .add, .reset {
     color: #34495E;
     background-color: #ECF0F1;
     border-radius: 50%;
@@ -38,7 +38,7 @@
     font-size: 13px;
 }
 
-#trigger:hover, #minus:hover, #add:hover, #reset:hover {
+.trigger:hover, .minus:hover, .add:hover, .reset:hover {
     background-color: #82E0AA;
 }
 
