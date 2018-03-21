@@ -1,16 +1,16 @@
-.circle {
+.minutes-circle {
     border-width: 10px;
     border-style: solid;
     border-radius: 50%;
-}
-
-.minutes-circle {
     border-color: blue;
     height: 300px;
     width: 300px;
 }
 
 .seconds-circle {
+    border-width: 10px;
+    border-style: solid;
+    border-radius: 50%;
     border-color: #82E0AA;
     height: 280px;
     width: 280px;
