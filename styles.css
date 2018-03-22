@@ -28,7 +28,7 @@
     font-size: 35px;
 }
 
-.trigger, .minus, .add, .reset {
+button {
     color: #34495E;
     background-color: #ECF0F1;
     border-radius: 50%;
@@ -38,7 +38,7 @@
     font-size: 13px;
 }
 
-.trigger:hover, .minus:hover, .add:hover, .reset:hover {
+button:hover {
     background-color: #82E0AA;
 }
 
