@@ -11,6 +11,21 @@ var seconds = 0;
 var clicks = 0;
 var interval;
 
+// seconds countdown circle setup
+var seconds_radius = 3, // set the seconds_radius of the circle
+seconds_circumference = 2 * seconds_radius * Math.PI;
+
+var els = document.querySelectorAll('.seconds');
+Array.prototype.forEach.call(els, function (el) {
+el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+el.setAttribute('r', seconds_radius + 'em');
+});
+
+document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
+
+var currentSecondsCount = 1, 
+maxSecondsCount = 60;
+
 // For display purposes, adds leading zeros if either minutes or seconds are below 10
 if(minutes < 10){
   minutes_div.innerHTML = '0' + minutes;
@@ -42,13 +57,22 @@ function clicked(){
 
 // Run - if # of clicks is odd
 function run(){
-  interval = setInterval(function(){   
+  interval = setInterval(function(){
+    var offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
+    console.log(currentSecondsCount, offset);
+    document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', offset);       
+    currentSecondsCount++;
+
     // if timer has only minutes and 0 seconds displayed (example: 20:00)
     if(minutes > 10 && seconds == 0){
       minutes_div.innerHTML = --minutes;
       seconds = 60;
       seconds_div.innerHTML = seconds;
+      currentSecondsCount = 1;
+      currentSecondsCount++;
     }
+
+
     // if timer is below 60:00, enables (+) button
     if(minutes <= 60 && seconds <= 60){
       add.disabled = false;
@@ -78,6 +102,7 @@ function run(){
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
+      clearInterval(intervalId);      
     }
   },1000);
 }
@@ -104,6 +129,7 @@ function increment(){
     seconds = 0;
     seconds_div.innerHTML = '0' + seconds;
     clearInterval(interval);
+
   }
   // disabled (+) if minutes is set to 60 (the max number of minutes the timer can be set)
   if(minutes === 60){

@@ -1,25 +1,37 @@
-.minutes-circle {
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-    border-color: blue;
-    height: 300px;
-    width: 300px;
+.svg.radial-progress {
+    position: relative;
+    display: inline-block;
 }
-
-.seconds-circle {
-    border-width: 10px;
-    border-style: solid;
-    border-radius: 50%;
-    border-color: #82E0AA;
-    height: 280px;
-    width: 280px;
+  
+svg {
+    transform: rotate(270deg);
+}
+  
+circle {
+    stroke-width: 2em;
+    fill: transparent;
+    transform: rotate(0.1deg); // to fix Firefox
+}
+  
+.seconds-radial-progress-cover {
+    stroke: #82E0AA;
+    stroke-width: 10px;
+}
+  
+.seconds-radial-progress-center {
+    fill: #CCC;
+}
+  
+.radial-fill {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .timer {
     margin: 50px 10px 45px 15px;
 }
-
 
 .countdown {
     font-family: 'Orbitron', sans-serif;

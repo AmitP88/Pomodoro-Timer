@@ -9,22 +9,25 @@
   <title>Pomodoro Timer</title>
 </head>
 <body>
-  <div class="minutes-circle">
-    <div class="seconds-circle">
-        <div id="timer" class="timer">
-            <div id="countdown" class="countdown">
-            <span id="minutes"></span>
-            <span id="colon">:</span>
-            <span id="seconds"></span>
-            </div>
-            <div class="buttons">
-            <button id="trigger" onclick="clicked()">&#9658;</button>    
-            <button id="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
-            <button id="add" onclick="increment()">&#x271a;</button>
-            <button id="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
-            </div>
-        </div>      
-    </div>      
+  <div class="svg radial-progress">
+      <svg height="10em" width="10em">
+        <circle class="seconds seconds-radial-progress-cover" r="" cx="5em" cy="5em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+        <circle class="seconds seconds-radial-progress-center" r="" cx="5em" cy="5em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+      </svg>
+  </div>
+
+  <div id="timer" class="timer">
+      <div id="countdown" class="countdown">
+      <span id="minutes"></span>
+      <span id="colon">:</span>
+      <span id="seconds"></span>
+      </div>
+      <div class="buttons">
+      <button id="trigger" onclick="clicked()">&#9658;</button>    
+      <button id="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
+      <button id="add" onclick="increment()">&#x271a;</button>
+      <button id="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
+      </div>
   </div>
 </body>
   <script src="app.js"></script>
