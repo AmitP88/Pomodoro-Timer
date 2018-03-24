@@ -30,14 +30,21 @@ circle {
 }
 
 .timer {
-    margin: 50px 10px 45px 15px;
+    margin: 45px 10px 45px 10px;
+    position:relative;
+    bottom:460px;
+    left:150px;
 }
 
 .countdown {
     font-family: 'Orbitron', sans-serif;
-    padding: 20px;
-    margin-left: 10%;
+    padding: 30px;
+    margin-left: 45px;
     font-size: 35px;
+}
+
+.trigger {
+    margin-left: 35px;
 }
 
 button {
