@@ -15,11 +15,11 @@ circle {
   
 .seconds-radial-progress-cover {
     stroke: #82E0AA;
-    stroke-width: 10px;
+    stroke-width: 15px;
 }
   
 .seconds-radial-progress-center {
-    fill: #CCC;
+    fill: #E6E6FA;
 }
   
 .radial-fill {
