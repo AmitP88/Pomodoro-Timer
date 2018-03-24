@@ -17,8 +17,8 @@ seconds_circumference = 2 * seconds_radius * Math.PI;
 
 var els = document.querySelectorAll('.seconds');
 Array.prototype.forEach.call(els, function (el) {
-el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
-el.setAttribute('r', seconds_radius + 'em');
+  el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+  el.setAttribute('r', seconds_radius + 'em');
 });
 
 document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
@@ -72,7 +72,6 @@ function run(){
       currentSecondsCount++;
     }
 
-
     // if timer is below 60:00, enables (+) button
     if(minutes <= 60 && seconds <= 60){
       add.disabled = false;
@@ -95,6 +94,7 @@ function run(){
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
     if(minutes === 0 && seconds < 0){
+      currentSecondsCount = 60;
       clearInterval(interval);
       minutes_div.innerHTML = "Time's";
       colon_div.innerHTML = ' ';
@@ -111,7 +111,10 @@ function run(){
 function increment(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
-  clicks = 0; 
+  clicks = 0;
+
+  currentSecondsCount = 0;
+
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
   if(minutes === 0 && minus.disabled === true && trigger.disabled === true) {
     minus.disabled = false;
@@ -151,7 +154,10 @@ function increment(){
 function decrement(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
-  clicks = 0; 
+  clicks = 0;
+
+  currentSecondsCount = 0;
+
   // re-enables the (-) button if the timer is set at 60 minutes (max time) and the (+) button is disabled
   if(minutes === 60 && add.disabled === true) {
     minus.disabled = false;
@@ -191,6 +197,7 @@ function reset_timer(){
   clearInterval(interval);
   minutes = 25;
   seconds = 0;
+  currentSecondsCount = 0;
   minutes_div.innerHTML = minutes;
   colon_div.innerHTML = ':';
   seconds_div.innerHTML = seconds;
