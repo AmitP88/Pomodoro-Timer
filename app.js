@@ -12,7 +12,7 @@ var clicks = 0;
 var interval;
 
 // seconds countdown circle setup
-var seconds_radius = 12, // set the seconds_radius of the circle
+var seconds_radius = 10, // set the seconds_radius of the circle
 seconds_circumference = 2 * seconds_radius * Math.PI;
 
 var els = document.querySelectorAll('.seconds');
