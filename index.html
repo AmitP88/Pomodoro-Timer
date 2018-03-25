@@ -6,23 +6,35 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="styles.css">
+<<<<<<< HEAD
 
   <title>Document</title>
+=======
+  <title>Pomodoro Timer</title>
+>>>>>>> gh-pages
 </head>
 <body>
-  <div id="timer">
-    <div id="countdown">
-      <span id="minutes"></span>
-      <span id="colon">:</span>
-      <span id="seconds"></span>
+    <div class="svg radial-progress">
+        <svg height="30em" width="30em">
+          <circle class="minutes minutes-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+          <circle class="minutes minutes-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+          <circle class="seconds seconds-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+          <circle class="seconds seconds-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+        </svg>
     </div>
-    <div class="buttons">
-      <button id="trigger" onclick="clicked()">Start</button>    
-      <button id="minus" onclick="decrement()">-</button>
-      <button id="add" onclick="increment()">+</button>
-      <button id="reset" onclick="reset_timer()">Reset</button>
+    <div id="timer" class="timer">
+        <div id="countdown" class="countdown">
+        <span id="minutes"></span>
+        <span id="colon">:</span>
+        <span id="seconds"></span>
+        </div>
+        <div class="buttons">
+        <button id="trigger" class="trigger" onclick="clicked()">&#9658;</button>    
+        <button id="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
+        <button id="add" onclick="increment()">&#x271a;</button>
+        <button id="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
+        </div>
     </div>
-  </div>
 </body>
   <script src="app.js"></script>
 </html>
