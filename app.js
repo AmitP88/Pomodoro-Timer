@@ -11,14 +11,31 @@ var seconds = 0;
 var clicks = 0;
 var interval;
 
+// minutes countdown circle setup
+var minutes_radius = 10.5 // sets the minutes_radius of the circle
+minutes_circumference = 2 * minutes_radius * Math.PI;
+
+var minutes_els = document.querySelectorAll('.minutes');
+Array.prototype.forEach.call(minutes_els, function (minutes_el)  {
+  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
+  minutes_el.setAttribute('r', minutes_radius + 'em');
+});
+
+document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
+
+var minutes_circle_time = 60 - minutes;
+
+var currentMinutesCount = minutes_circle_time;
+maxMinutesCount = 60;
+
 // seconds countdown circle setup
 var seconds_radius = 10, // set the seconds_radius of the circle
 seconds_circumference = 2 * seconds_radius * Math.PI;
 
-var els = document.querySelectorAll('.seconds');
-Array.prototype.forEach.call(els, function (el) {
-  el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
-  el.setAttribute('r', seconds_radius + 'em');
+var seconds_els = document.querySelectorAll('.seconds');
+Array.prototype.forEach.call(seconds_els, function (seconds_el) {
+  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+  seconds_el.setAttribute('r', seconds_radius + 'em');
 });
 
 document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
@@ -58,14 +75,22 @@ function clicked(){
 // Run - if # of clicks is odd
 function run(){
   interval = setInterval(function(){
-    var offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
-    console.log(currentSecondsCount, offset);
-    document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', offset);       
+    // decrements seconds circle for each second counted down
+    var seconds_offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
+    console.log(currentSecondsCount, seconds_offset);
+    document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', seconds_offset);
     currentSecondsCount++;
+
+    // decrements minutes circle for each minute counted down
+    var minutes_offset = -(minutes_circumference / maxMinutesCount) * currentMinutesCount + 'em';
+    console.log(currentMinutesCount, minutes_offset);
+    document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);
+    
 
     // if timer has only minutes and 0 seconds displayed (example: 20:00)
     if(minutes > 10 && seconds == 0){
       minutes_div.innerHTML = --minutes;
+      currentMinutesCount++;      
       seconds = 60;
       seconds_div.innerHTML = seconds;
       currentSecondsCount = 1;
@@ -94,15 +119,13 @@ function run(){
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
     if(minutes === 0 && seconds < 0){
-      currentSecondsCount = 60;
       clearInterval(interval);
       minutes_div.innerHTML = "Time's";
       colon_div.innerHTML = ' ';
       seconds_div.innerHTML = "Up!";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
-      trigger.disabled = true;
-      clearInterval(intervalId);      
+      trigger.disabled = true;    
     }
   },1000);
 }
@@ -112,7 +135,6 @@ function increment(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
-
   currentSecondsCount = 0;
 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
@@ -128,6 +150,7 @@ function increment(){
   // sets the max number of minutes available to increment up to 60 (so that the timer can only have a max number of 60 minutes - 1 hour)
   if(minutes >= 0 && minutes <= 59){
     minutes_div.innerHTML = ++minutes;
+    currentMinutesCount = minutes;
     colon_div.innerHTML = ':';
     seconds = 0;
     seconds_div.innerHTML = '0' + seconds;
@@ -155,7 +178,6 @@ function decrement(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
-
   currentSecondsCount = 0;
 
   // re-enables the (-) button if the timer is set at 60 minutes (max time) and the (+) button is disabled
