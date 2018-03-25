@@ -15,7 +15,16 @@ svg {
 circle {
     stroke-width: 2em;
     fill: transparent;
-    transform: rotate(0.1deg); // to fix Firefox
+    transform: rotate(0.1deg); /* to fix Firefox */
+}
+
+.minutes-radial-progress-cover {
+    stroke: blue;
+    stroke-width: 15px;    
+}
+
+.minutes-radial-progress-center {
+    fill: #E6E6FA;    
 }
   
 .seconds-radial-progress-cover {
