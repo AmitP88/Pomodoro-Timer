@@ -72,19 +72,27 @@ function clicked(){
   } 
 }
 
-// Run - if # of clicks is odd
-function run(){
-  interval = setInterval(function(){
+function seconds_circle(){
     // decrements seconds circle for each second counted down
     var seconds_offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
     console.log(currentSecondsCount, seconds_offset);
     document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', seconds_offset);
-    currentSecondsCount++;
+    currentSecondsCount++;  
+}
 
+function minutes_circle() {
     // decrements minutes circle for each minute counted down
     var minutes_offset = -(minutes_circumference / maxMinutesCount) * currentMinutesCount + 'em';
     console.log(currentMinutesCount, minutes_offset);
-    document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);
+    document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);  
+}
+
+// Run - if # of clicks is odd
+function run(){
+  interval = setInterval(function(){
+
+    seconds_circle();
+    minutes_circle();
     
 
     // if timer has only minutes and 0 seconds displayed (example: 20:00)
@@ -135,6 +143,10 @@ function increment(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
+
+  minutes_circle_time = 60 - minutes;
+  currentMinutesCount = minutes_circle_time;
+
   currentSecondsCount = 0;
 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
@@ -150,7 +162,6 @@ function increment(){
   // sets the max number of minutes available to increment up to 60 (so that the timer can only have a max number of 60 minutes - 1 hour)
   if(minutes >= 0 && minutes <= 59){
     minutes_div.innerHTML = ++minutes;
-    currentMinutesCount = minutes;
     colon_div.innerHTML = ':';
     seconds = 0;
     seconds_div.innerHTML = '0' + seconds;
@@ -178,6 +189,10 @@ function decrement(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
+
+  minutes_circle_time = 60 - minutes;
+  currentMinutesCount = minutes_circle_time;    
+
   currentSecondsCount = 0;
 
   // re-enables the (-) button if the timer is set at 60 minutes (max time) and the (+) button is disabled
@@ -220,6 +235,8 @@ function reset_timer(){
   minutes = 25;
   seconds = 0;
   currentSecondsCount = 0;
+  minutes_circle_time = 60 - minutes;
+  currentMinutesCount = minutes_circle_time;
   minutes_div.innerHTML = minutes;
   colon_div.innerHTML = ':';
   seconds_div.innerHTML = seconds;
