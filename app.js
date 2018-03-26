@@ -12,7 +12,7 @@ var clicks = 0;
 var interval;
 
 // minutes countdown circle setup
-var minutes_radius = 10.5 // sets the minutes_radius of the circle
+var minutes_radius = 10.5
 minutes_circumference = 2 * minutes_radius * Math.PI;
 
 var minutes_els = document.querySelectorAll('.minutes');
@@ -29,7 +29,7 @@ var currentMinutesCount = minutes_circle_time;
 maxMinutesCount = 60;
 
 // seconds countdown circle setup
-var seconds_radius = 10, // set the seconds_radius of the circle
+var seconds_radius = 10,
 seconds_circumference = 2 * seconds_radius * Math.PI;
 
 var seconds_els = document.querySelectorAll('.seconds');
@@ -59,7 +59,6 @@ if(seconds < 10){
 // Clicked - to increment clicks variable
 function clicked(){
   clicks++;
-//   console.log("clicks:" + clicks);
   // check to see if number of clicks are even or odd
   if(clicks % 2 == 0)/* number of clicks is even */{
     // pauses the timer if number of clicks is even
@@ -112,6 +111,9 @@ function run(){
     // if timer has minutes displayed that fall between 1 and 10, adds a leading zero to minutes (example: 05:00) 
     if(minutes > 1 && minutes <= 10 && seconds == 0){
       minutes_div.innerHTML = '0' + --minutes;
+      currentSecondsCount = 1;
+      currentSecondsCount++;
+      currentMinutesCount = currentMinutesCount + 1;
       seconds = 60;
       seconds_div.innerHTML = seconds;
     }
@@ -120,6 +122,7 @@ function run(){
     if( minutes == 1 && seconds == 0 ){
       minutes = 0;
       minutes_div.innerHTML = '0' + minutes;
+      currentMinutesCount++;
       seconds = 60;
       currentSecondsCount++;
       seconds_div.innerHTML = seconds;
