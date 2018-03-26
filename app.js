@@ -121,12 +121,14 @@ function run(){
       minutes = 0;
       minutes_div.innerHTML = '0' + minutes;
       seconds = 60;
+      currentSecondsCount++;
       seconds_div.innerHTML = seconds;
     }
     // counts down seconds and adds a leading zero when seconds fall below 10
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
     if(minutes === 0 && seconds < 0){
+      currentMinutesCount = 0;
       clearInterval(interval);
       minutes_div.innerHTML = "Time's";
       colon_div.innerHTML = ' ';
@@ -144,10 +146,10 @@ function increment(){
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
 
-  minutes_circle_time = 60 - minutes;
+  minutes_circle_time = 59 - minutes;
   currentMinutesCount = minutes_circle_time;
 
-  currentSecondsCount = 0;
+  currentSecondsCount = 1;
 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
   if(minutes === 0 && minus.disabled === true && trigger.disabled === true) {
@@ -190,7 +192,7 @@ function decrement(){
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
 
-  minutes_circle_time = 60 - minutes;
+  minutes_circle_time = 61 - minutes;
   currentMinutesCount = minutes_circle_time;    
 
   currentSecondsCount = 0;
