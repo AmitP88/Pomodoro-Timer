@@ -1,6 +1,7 @@
 body {
     height: 500px;
     width: 500px;
+    background-color: #34495E;
 }
 
 .svg.radial-progress {
@@ -19,21 +20,21 @@ circle {
 }
 
 .minutes-radial-progress-cover {
-    stroke: blue;
+    stroke: #af111c;
     stroke-width: 15px;    
 }
 
 .minutes-radial-progress-center {
-    fill: #E6E6FA;    
+    fill: #282828;  
 }
   
 .seconds-radial-progress-cover {
-    stroke: #82E0AA;
+    stroke:#FFFAF0;
     stroke-width: 15px;
 }
   
 .seconds-radial-progress-center {
-    fill: #E6E6FA;
+    fill: #5F9F9F;
 }
   
 .radial-fill {
