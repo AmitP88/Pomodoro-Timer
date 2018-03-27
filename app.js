@@ -86,6 +86,8 @@ function minutes_circle() {
     document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);  
 }
 
+minutes_circle();
+
 // Run - if # of clicks is odd
 function run(){
   interval = setInterval(function(){
@@ -100,8 +102,8 @@ function run(){
       currentMinutesCount++;      
       seconds = 60;
       seconds_div.innerHTML = seconds;
-      currentSecondsCount = 1;
-      currentSecondsCount++;
+      // currentSecondsCount = 1;
+      // currentSecondsCount++;
     }
 
     // if timer is below 60:00, enables (+) button
