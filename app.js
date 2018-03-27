@@ -201,8 +201,9 @@ function decrement(){
 
   minutes_circle_time = 61 - minutes;
   currentMinutesCount = minutes_circle_time;    
-
+  minutes_circle();
   currentSecondsCount = 0;
+  seconds_circle();
 
   // re-enables the (-) button if the timer is set at 60 minutes (max time) and the (+) button is disabled
   if(minutes === 60 && add.disabled === true) {
