@@ -151,9 +151,6 @@ function increment(){
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
 
-  minutes_circle_time = 59 - minutes;
-  currentMinutesCount = minutes_circle_time;
-
   currentSecondsCount = 1;
 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
@@ -169,6 +166,9 @@ function increment(){
   // sets the max number of minutes available to increment up to 60 (so that the timer can only have a max number of 60 minutes - 1 hour)
   if(minutes >= 0 && minutes <= 59){
     minutes_div.innerHTML = ++minutes;
+    minutes_circle_time = 60 - minutes;
+    currentMinutesCount = minutes_circle_time;
+    minutes_circle();
     colon_div.innerHTML = ':';
     seconds = 0;
     seconds_div.innerHTML = '0' + seconds;
