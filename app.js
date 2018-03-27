@@ -171,6 +171,8 @@ function increment(){
     minutes_circle();
     colon_div.innerHTML = ':';
     seconds = 0;
+    currentSecondsCount = 0;
+    seconds_circle();
     seconds_div.innerHTML = '0' + seconds;
     clearInterval(interval);
 
