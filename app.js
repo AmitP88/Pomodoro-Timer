@@ -86,7 +86,7 @@ function minutes_circle() {
     document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);  
 }
 
-minutes_circle();
+minutes_circle(); // sets minutes circle to default minutes
 
 // Run - if # of clicks is odd
 function run(){
@@ -243,7 +243,9 @@ function reset_timer(){
   seconds = 0;
   currentSecondsCount = 0;
   minutes_circle_time = 60 - minutes;
-  currentMinutesCount = minutes_circle_time;
+  currentMinutesCount = minutes_circle_time;  
+  minutes_circle();
+  seconds_circle();
   minutes_div.innerHTML = minutes;
   colon_div.innerHTML = ':';
   seconds_div.innerHTML = seconds;
