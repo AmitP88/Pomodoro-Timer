@@ -111,8 +111,6 @@ function run(){
     // if timer has minutes displayed that fall between 1 and 10, adds a leading zero to minutes (example: 05:00) 
     if(minutes > 1 && minutes <= 10 && seconds == 0){
       minutes_div.innerHTML = '0' + --minutes;
-      currentSecondsCount = 1;
-      currentSecondsCount++;
       currentMinutesCount = currentMinutesCount + 1;
       seconds = 60;
       seconds_div.innerHTML = seconds;
