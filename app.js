@@ -102,8 +102,6 @@ function run(){
       currentMinutesCount++;      
       seconds = 60;
       seconds_div.innerHTML = seconds;
-      // currentSecondsCount = 1;
-      // currentSecondsCount++;
     }
 
     // if timer is below 60:00, enables (+) button
@@ -126,6 +124,7 @@ function run(){
       minutes_div.innerHTML = '0' + minutes;
       currentMinutesCount++;
       seconds = 60;
+      currentSecondsCount = 1;
       currentSecondsCount++;
       seconds_div.innerHTML = seconds;
     }
@@ -135,6 +134,8 @@ function run(){
     if(minutes === 0 && seconds < 0){
       currentMinutesCount = 0;
       clearInterval(interval);
+      currentSecondsCount = 0;
+      seconds_circle();
       minutes_div.innerHTML = "Time's";
       colon_div.innerHTML = ' ';
       seconds_div.innerHTML = "Up!";
