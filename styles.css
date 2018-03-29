@@ -91,9 +91,9 @@ input {
 label {
     position: relative;
     top: 53px;
-    left: 76px;
+    left: 70px;
     font-family: 'Orbitron', sans-serif;
-    font-size: 17px;
+    font-size: 22px;
 }
 
 .work-button {
@@ -101,7 +101,7 @@ label {
 }
 
 .work-label {
-    left: 45px;
+    left: 40px;
 }
 
 .break-button {
