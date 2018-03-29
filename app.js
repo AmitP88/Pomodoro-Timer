@@ -134,9 +134,9 @@ function run(){
       clearInterval(interval);
       currentSecondsCount = 0;
       seconds_circle();
-      minutes_div.innerHTML = "Time's";
+      minutes_div.innerHTML = "Break";
       colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "Up!";
+      seconds_div.innerHTML = "Time!";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;    
