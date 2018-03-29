@@ -10,6 +10,11 @@ var minutes = 25;
 var seconds = 0;
 var clicks = 0;
 var interval;
+var audio = new Audio('analog-watch-alarm_daniel-simion.mp3');
+
+function stop_alarm() {
+  audio.pause();
+}
 
 // minutes countdown circle setup
 var minutes_radius = 10.5
@@ -134,6 +139,7 @@ function run(){
       clearInterval(interval);
       currentSecondsCount = 0;
       seconds_circle();
+      audio.play();
       minutes_div.innerHTML = "Break";
       colon_div.innerHTML = ' ';
       seconds_div.innerHTML = "Time!";
@@ -149,7 +155,7 @@ function increment(){
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
-
+  stop_alarm();
   currentSecondsCount = 1;
 
   // if the timer runs out (reaches below 00:00) and the (-) button is disabled, allows the user to decrement minutes again only after incrementing minutes
@@ -240,6 +246,7 @@ function decrement(){
 
 // Reset - resets timer back to default state; seconds go back to default value
 function reset_timer(){
+  stop_alarm();
   clearInterval(interval);
   minutes = 25;
   seconds = 0;
