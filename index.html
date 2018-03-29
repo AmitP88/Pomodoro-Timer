@@ -10,25 +10,31 @@
 </head>
 <body>
     <div class="svg radial-progress">
-        <svg height="30em" width="30em">
-          <circle class="minutes minutes-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
-          <circle class="minutes minutes-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
-          <circle class="seconds seconds-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
-          <circle class="seconds seconds-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
-        </svg>
+      <svg height="30em" width="30em">
+        <circle class="minutes minutes-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+        <circle class="minutes minutes-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+        <circle class="seconds seconds-radial-progress-cover" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0"></circle>
+        <circle class="seconds seconds-radial-progress-center" r="" cx="15em" cy="15em" fill="transparent" stroke-dasharray="0em" stroke-dashoffset="0em"></circle>
+      </svg>
     </div>
     <div id="timer" class="timer">
-        <div id="countdown" class="countdown">
-          <span id="minutes"></span>
-          <span id="colon">:</span>
-          <span id="seconds"></span>
-        </div>
-        <div class="buttons">
+      <div id="countdown" class="countdown">
+        <span id="minutes"></span>
+        <span id="colon">:</span>
+        <span id="seconds"></span>
+      </div>
+      <div class="buttons">
         <button id="trigger" class="trigger" onclick="clicked()">&#9658;</button>    
         <button id="minus" onclick="decrement()"><strong>&#x2012;</strong></button>
         <button id="add" onclick="increment()">&#x271a;</button>
         <button id="reset" onclick="reset_timer()"><strong>&#x21BA;</strong></button>
-        </div>
+      </div>
+      <div class="choices">
+        <input type="radio" id="choice1" class="work-button" name="work-timer" value="work">
+        <label for="choice1" class="work-label">Work</label>
+        <input type="radio" id="choice2" class="break-button" name="break-timer" value="break">
+        <label for="choice2" class="break-label">Break</label>
+      </div>
     </div>
 </body>
   <script src="app.js"></script>

@@ -48,7 +48,7 @@ circle {
     position:relative;
     height: 50px;
     width: 300px;
-    bottom:280px;
+    bottom:330px;
     left:80px;
 }
 
@@ -64,7 +64,7 @@ circle {
 
 button {
     position: relative;
-    top: 20px;
+    top: 25px;
     color: #34495E;
     background-color: #ECF0F1;
     border-radius: 50%;
@@ -81,4 +81,33 @@ button:hover {
 /* removes outline when clicking a button */
 *:focus {
     outline: 0 !important;
+}
+
+input {
+    position: relative;
+    top: 80px;
+}
+
+label {
+    position: relative;
+    top: 53px;
+    left: 76px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 17px;
+}
+
+.work-button {
+    left: 85px;
+}
+
+.work-label {
+    left: 45px;
+}
+
+.break-button {
+    right: -115px;
+}
+
+.break-label {
+    right: 45px;
 }
