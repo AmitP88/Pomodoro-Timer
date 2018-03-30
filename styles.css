@@ -118,3 +118,10 @@ label {
     left: 133px;
     top: 230px;
 }
+
+h1, h3 {
+    text-align: center;
+    color: whitesmoke;
+    font-family: 'Satisfy', cursive;
+    margin-top: 10%;
+}
