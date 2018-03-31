@@ -135,8 +135,10 @@ h1, h3 {
 
 h1 {
     margin-top: 10%;
+    font-size: 3vw;
 }
 
 h3 {
-    font-style: italic;    
+    font-style: italic;
+    font-size: 2vw;
 }
