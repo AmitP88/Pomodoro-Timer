@@ -152,11 +152,21 @@ h3 {
 }
 
 .fa-github {
+    color: black;
     margin-top: 30%;
+}
+
+.fa-github:hover {
+    color: #00CED1;
+}
+
+.github-profile-link {
+    color: whitesmoke;
 }
 
 @media only screen and (min-width: 500px) {
     body {
         overflow-y: hidden;
     }
+
 }
