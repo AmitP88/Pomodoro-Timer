@@ -1,3 +1,7 @@
+html {
+    background-color: #001f3f;
+}
+
 body {
     overflow-x: hidden;
     background-color: #34495E;
@@ -6,6 +10,9 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    padding-left: 100px;
+    padding-right: 100px;
+    margin: 0;
 }
 
 .svg.radial-progress {
