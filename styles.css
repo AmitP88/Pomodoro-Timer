@@ -124,13 +124,17 @@ label {
     top: 230px;
 }
 
-h1, h3 {
+h1, h3, p {
     text-align: center;
     color: whitesmoke;
     font-family: 'Open Sans', sans-serif;
     margin-top: 10%;
     padding: 0;
     margin-top: 15px;
+}
+
+p {
+    margin-top: 0;
 }
 
 h1 {
@@ -141,4 +145,10 @@ h1 {
 h3 {
     font-style: italic;
     font-size: 2vw;
+}
+
+.fa-github {
+    transform: rotate(-360deg);
+    margin-left: 50%;
+    transform: translate(-50%, -50%);
 }
