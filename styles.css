@@ -103,23 +103,23 @@ input {
 label {
     position: relative;
     top: 35px;
-    left: 30px;
+    left: 50px;
     font-family: 'Orbitron', sans-serif;
     font-size: 22px;
 }
 
 .work-button {
-    left: 75px;
+    left: 60px;
     width: 30px;
     height: 30px;
 }
 
 .work-label {
-    left: 20px;
+    left: 0;
 }
 
 .break-button {
-    right: -90px;
+    right: -110px;
     width: 30px;
     height: 30px;
 }
@@ -163,7 +163,7 @@ h3 {
 
 .fa-github {
     transform: rotate(-360deg);
-    margin-left: 49%;
+    margin-left: 50%;
     transform: translate(-50%, -50%);
 }
 
