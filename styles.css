@@ -61,7 +61,7 @@ circle {
     height: 50px;
     width: 300px;
     bottom:340px;
-    left:20px;
+    left:25px;
 }
 
 .countdown {
@@ -152,7 +152,7 @@ p {
 }
 
 h1 {
-    margin-top: 10%;
+    margin-top: 35%;
     margin-bottom: 2%;
 }
 
@@ -163,13 +163,13 @@ h3 {
 
 .fa-github {
     transform: rotate(-360deg);
-    margin-left: 50%;
+    margin-left: 49%;
     transform: translate(-50%, -50%);
 }
 
 .fa-github {
     color: black;
-    margin-top: 30%;
+    margin-top: 15%;
 }
 
 .fa-github:hover {
