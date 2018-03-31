@@ -147,10 +147,16 @@ h3 {
 
 .fa-github {
     transform: rotate(-360deg);
-    margin-left: 49%;
+    margin-left: 50%;
     transform: translate(-50%, -50%);
 }
 
 .fa-github {
     margin-top: 30%;
+}
+
+@media only screen and (min-width: 500px) {
+    body {
+        overflow-y: hidden;
+    }
 }
