@@ -196,6 +196,10 @@ h3 {
     h3 {
         font-size: 4vw;
     }
+
+    button:hover {
+        background-color: #ECF0F1;
+    }
 }
 
 
