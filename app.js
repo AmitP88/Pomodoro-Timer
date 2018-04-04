@@ -246,6 +246,9 @@ function decrement(){
 
 // Reset - resets timer back to default state; seconds go back to default value
 function reset_timer(){
+  if(minutes === 60){
+    add.disabled = false;
+  }
   stop_alarm();
   clearInterval(interval);
   minutes = 25;
@@ -261,6 +264,7 @@ function reset_timer(){
   minus.disabled = false;
   trigger.innerHTML = '&#9658;';
   trigger.disabled = false;
+
   // For display purposes, adds leading zeros if either minutes or seconds are below 10
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
