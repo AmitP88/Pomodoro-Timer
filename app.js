@@ -180,10 +180,11 @@ function increment(){
     seconds_circle();
     seconds_div.innerHTML = '0' + seconds;
     clearInterval(interval);
-
+    add.disabled = false;
   }
   // disabled (+) if minutes is set to 60 (the max number of minutes the timer can be set)
   if(minutes === 60){
+    toggleOff();
     add.disabled = true;
   }
   // adds a leading zero to minutes if there are less than 10 minutes left on timer (example 05:00)  
@@ -193,10 +194,75 @@ function increment(){
     minutes_div.innerHTML = minutes;
   }
   // if timer runs out (reaches 00:00) and time's up is displayed, disables (+) button
-  if(minutes === 0 && seconds < 0){
-    add.disabled = true;
+  // if(minutes === 0 && seconds < 0){
+  //   add.disabled = true;
+  // }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+var tid = 0;
+var speed = 100;
+
+add.addEventListener("mousedown", function() {
+  toggleOn();
+})
+
+add.addEventListener("mouseup", function() {
+  toggleOff();
+})
+  
+function toggleOn(){
+  if(tid==0){
+    tid=setInterval('increment()',speed);
   }
 }
+
+function toggleOff(){
+  if(tid!=0){
+    clearInterval(tid);
+    tid=0;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // Decrement - allows the user to decrease the number of minutes (down to a minimum of 0)
 function decrement(){
@@ -244,8 +310,11 @@ function decrement(){
   
 }
 
+
+
 // Reset - resets timer back to default state; seconds go back to default value
 function reset_timer(){
+  tid = 0;
   if(minutes === 60){
     add.disabled = false;
   }
@@ -264,7 +333,6 @@ function reset_timer(){
   minus.disabled = false;
   trigger.innerHTML = '&#9658;';
   trigger.disabled = false;
-
   // For display purposes, adds leading zeros if either minutes or seconds are below 10
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
