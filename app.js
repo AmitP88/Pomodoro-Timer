@@ -214,19 +214,19 @@ function increment(){
 var tid = 0;
 var speed = 220;
 
-add.addEventListener("mousedown", function() {
+add.addEventListener("mousedown","touchstart", function() {
   toggleOnIncrement();
 })
 
-add.addEventListener("mouseup", function() {
+add.addEventListener("mouseup","touchend", function() {
   toggleOff();
 })
 
-minus.addEventListener("mousedown", function() {
+minus.addEventListener("mousedown","touchstart", function() {
   toggleOnDecrement();
 })
 
-minus.addEventListener("mouseup", function() {
+minus.addEventListener("mouseup","touchend", function() {
   toggleOff();
 })
 
