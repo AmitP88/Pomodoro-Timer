@@ -187,6 +187,7 @@ function increment(){
     toggleOff();
     add.disabled = true;
   }
+
   // adds a leading zero to minutes if there are less than 10 minutes left on timer (example 05:00)  
   if(minutes < 10){
     minutes_div.innerHTML = '0' + minutes;
@@ -214,14 +215,28 @@ var tid = 0;
 var speed = 100;
 
 add.addEventListener("mousedown", function() {
-  toggleOn();
+  toggleOnIncrement();
 })
 
 add.addEventListener("mouseup", function() {
   toggleOff();
 })
+
+minus.addEventListener("mousedown", function() {
+  toggleOnDecrement();
+})
+
+minus.addEventListener("mouseup", function() {
+  toggleOff();
+})
+
+function toggleOnDecrement(){
+  if(tid==0){
+    tid=setInterval('decrement()',speed);
+  }
+}
   
-function toggleOn(){
+function toggleOnIncrement(){
   if(tid==0){
     tid=setInterval('increment()',speed);
   }
@@ -297,6 +312,13 @@ function decrement(){
   } else {
     minutes_div.innerHTML = minutes;
   }
+  
+    
+  if(minutes === 0){
+    toggleOff();
+    minus.disabled = true;
+  }
+  
   // if timer is 00:00, disables (-) button
   if(minutes === 0 && seconds === 0){
     minus.disabled = true;
@@ -317,6 +339,7 @@ function reset_timer(){
   tid = 0;
   if(minutes === 60){
     add.disabled = false;
+    minus.disabled = true;
   }
   stop_alarm();
   clearInterval(interval);
