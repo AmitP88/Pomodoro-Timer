@@ -212,7 +212,7 @@ function increment(){
 
 
 var tid = 0;
-var speed = 100;
+var speed = 220;
 
 add.addEventListener("mousedown", function() {
   toggleOnIncrement();
