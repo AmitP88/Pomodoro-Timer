@@ -151,7 +151,7 @@ function run(){
     // counts down seconds and adds a leading zero when seconds fall below 10
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
-    if(minutes === 0 && seconds < 0){
+    if((minutes === 0 && seconds < 0)&&(work_button.checked)){
       currentMinutesCount = 0;
       clearInterval(interval);
       currentSecondsCount = 0;
@@ -162,8 +162,26 @@ function run(){
       seconds_div.innerHTML = "Time!";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
-      trigger.disabled = true;    
+      trigger.disabled = true;
+    } else if ((minutes === 0 && seconds < 0)&&(break_button.checked)){
+        currentMinutesCount = 0;
+        clearInterval(interval);
+        currentSecondsCount = 0;
+        seconds_circle();
+        audio.play();
+        minutes_div.innerHTML = "Begin";
+        colon_div.innerHTML = ' ';
+        seconds_div.innerHTML = "Work";
+        minus.disabled = true;
+        trigger.innerHTML = '&#9658;';
+        trigger.disabled = true;
     }
+
+
+
+
+
+
   },1000);
 }
 
