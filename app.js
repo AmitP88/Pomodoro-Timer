@@ -11,6 +11,24 @@ var seconds = 0;
 var clicks = 0;
 var interval;
 var audio = new Audio('analog-watch-alarm_daniel-simion.mp3');
+var work_button = document.getElementById('choice1');
+var break_button = document.getElementById('choice2');
+var minute_stroke = document.querySelector('.minutes-radial-progress-cover');
+
+console.log(minute_stroke);
+
+minute_stroke.style.stroke = "#af111c";
+
+work_button.onclick = changeProgressBarColor;
+break_button.onclick = changeProgressBarColor;
+
+function changeProgressBarColor() {
+  if (work_button.checked) {
+    minute_stroke.style.stroke = "#af111c"; // red
+  } else if (break_button.checked) {
+    minute_stroke.style.stroke = "#00CED1"; // blue
+  }
+}
 
 function stop_alarm() {
   audio.pause();
@@ -99,8 +117,7 @@ function run(){
 
     seconds_circle();
     minutes_circle();
-    
-
+   
     // if timer has only minutes and 0 seconds displayed (example: 20:00)
     if(minutes > 10 && seconds == 0){
       minutes_div.innerHTML = --minutes;
@@ -194,22 +211,7 @@ function increment(){
   } else {
     minutes_div.innerHTML = minutes;
   }
-  // if timer runs out (reaches 00:00) and time's up is displayed, disables (+) button
-  // if(minutes === 0 && seconds < 0){
-  //   add.disabled = true;
-  // }
 }
-
-
-
-
-
-
-
-
-
-
-
 
 var tid = 0;
 var speed = 220;
@@ -248,36 +250,6 @@ function toggleOff(){
     tid=0;
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 // Decrement - allows the user to decrease the number of minutes (down to a minimum of 0)
 function decrement(){
@@ -331,8 +303,6 @@ function decrement(){
   }
   
 }
-
-
 
 // Reset - resets timer back to default state; seconds go back to default value
 function reset_timer(){

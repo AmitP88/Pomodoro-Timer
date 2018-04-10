@@ -39,8 +39,7 @@ circle {
 }
 
 .minutes-radial-progress-cover {
-    stroke: #af111c;
-    stroke-width: 15px;    
+    stroke-width: 15px;
 }
 
 .minutes-radial-progress-center {
