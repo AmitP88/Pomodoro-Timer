@@ -183,7 +183,9 @@ h3 {
 }
 
 .github-profile-link {
-    color: whitesmoke;
+    color: #9932CC;
+    font-weight: bold;
+    text-decoration-line: none;
 }
 
 @media only screen and (max-width: 500px) {
