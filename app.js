@@ -6,7 +6,7 @@ var seconds_div = document.getElementById("seconds");
 var reset = document.getElementById("reset");
 var add = document.getElementById("add");
 var minus = document.getElementById("minus");
-var minutes = 25;
+var minutes = 60;
 var seconds = 0;
 var clicks = 0;
 var interval;
@@ -331,7 +331,7 @@ function reset_timer(){
   }
   stop_alarm();
   clearInterval(interval);
-  minutes = 25;
+  minutes = 60;
   seconds = 0;
   currentSecondsCount = 0;
   minutes_circle_time = 60 - minutes;
