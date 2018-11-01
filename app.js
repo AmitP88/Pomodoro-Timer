@@ -114,24 +114,29 @@ minutes_circle(); // sets minutes circle to default minutes
 // runAfterWork - if work timer runs out, switches to break timer, resets timer, and countsdown
 function runAfterWork(){
   stop_alarm();
-  break_button.checked = true;
-  minute_stroke.style.stroke = "#00CED1"; // blue
-  minutes = 60;
-  seconds = 0;
-  currentSecondsCount = 0;
-  minutes_circle_time = 60 - minutes;
-  currentMinutesCount = minutes_circle_time;  
-  minutes_circle();
-  seconds_circle();
-  minutes_div.innerHTML = minutes;
-  colon_div.innerHTML = ':';
-  seconds_div.innerHTML = seconds;
 
-  if(seconds < 10){
+  interval = setInterval(function(){
+    break_button.checked = true;
+    minute_stroke.style.stroke = "#00CED1"; // blue
+    minutes = 60;
+    seconds = 0;
+    currentSecondsCount = 0;
+    minutes_circle_time = 60 - minutes;
+    currentMinutesCount = minutes_circle_time;
+    minutes_div.innerHTML = minutes;
+    colon_div.innerHTML = ':';
+    seconds_div.innerHTML = seconds;
     seconds_div.innerHTML = '0' + seconds;
-  } else {
-    seconds_div.innerHTML = seconds;  
-  }  
+
+    seconds_circle();
+    minutes_circle();
+
+
+
+    
+  }, 1000);
+
+
 
 
 
