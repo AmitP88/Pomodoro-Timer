@@ -111,6 +111,34 @@ function minutes_circle() {
 
 minutes_circle(); // sets minutes circle to default minutes
 
+// runAfterWork - if work timer runs out, switches to break timer, resets timer, and countsdown
+function runAfterWork(){
+  stop_alarm();
+  break_button.checked = true;
+  minute_stroke.style.stroke = "#00CED1"; // blue
+  minutes = 60;
+  seconds = 0;
+  currentSecondsCount = 0;
+  minutes_circle_time = 60 - minutes;
+  currentMinutesCount = minutes_circle_time;  
+  minutes_circle();
+  seconds_circle();
+  minutes_div.innerHTML = minutes;
+  colon_div.innerHTML = ':';
+  seconds_div.innerHTML = seconds;
+
+  if(seconds < 10){
+    seconds_div.innerHTML = '0' + seconds;
+  } else {
+    seconds_div.innerHTML = seconds;  
+  }  
+
+
+
+}
+
+
+
 // Run - if # of clicks is odd
 function run(){
   interval = setInterval(function(){
@@ -163,6 +191,10 @@ function run(){
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
+
+      setTimeout("runAfterWork()", 3000);
+      
+
     } else if ((minutes === 0 && seconds < 0)&&(break_button.checked)){
         currentMinutesCount = 0;
         clearInterval(interval);
@@ -181,9 +213,10 @@ function run(){
 
 
 
-
   },1000);
 }
+
+
 
 // Increment - allows the user to increase the number of minutes on timer (up to 60 minutes max)
 function increment(){
