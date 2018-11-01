@@ -165,9 +165,9 @@ function runAfterWork(){
       currentSecondsCount = 0;
       seconds_circle();
       audio.play();
-      minutes_div.innerHTML = "Time's";
+      minutes_div.innerHTML = "Begin";
       colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "Up!";
+      seconds_div.innerHTML = "Work";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
@@ -176,10 +176,71 @@ function runAfterWork(){
 
   }, 1000);
 
+}
+
+function runAfterBreak(){
+  stop_alarm();
+  work_button.checked = true;
+  minute_stroke.style.stroke = "#00FF00"; // lime green
+  reset_timer();
+  clicks = 0;
+  clicked();
+  clearInterval(interval);
+
+  interval = setInterval(function(){
+
+    seconds_circle();
+    minutes_circle();
+
+    // if timer has only minutes and 0 seconds displayed (example: 20:00)
+    if(minutes > 10 && seconds == 0){
+      minutes_div.innerHTML = --minutes;
+      currentMinutesCount++;      
+      seconds = 60;
+      seconds_div.innerHTML = seconds;
+    }
+
+    // if timer is below 60:00, enables (+) button
+    if(minutes <= 60 && seconds <= 60){
+      add.disabled = false;
+    }    
+    // if timer has minutes displayed that fall between 1 and 10, adds a leading zero to minutes (example: 05:00) 
+    if(minutes > 1 && minutes <= 10 && seconds == 0){
+      minutes_div.innerHTML = '0' + --minutes;
+      currentMinutesCount = currentMinutesCount + 1;
+      seconds = 60;
+      seconds_div.innerHTML = seconds;
+    }
+
+    // if timer is on final minute (01:00)
+    if( minutes == 1 && seconds == 0 ){
+      minutes = 0;
+      minutes_div.innerHTML = '0' + minutes;
+      currentMinutesCount++;
+      seconds = 60;
+      currentSecondsCount = 1;
+      currentSecondsCount++;
+      seconds_div.innerHTML = seconds;
+    }
+    // counts down seconds and adds a leading zero when seconds fall below 10
+    seconds_div.innerHTML = ('0' + --seconds).slice(-2);
+    // if timer runs out (reaches 00:00), displays "time's up" message on clock
+    if( minutes === 0 && seconds < 0 ){
+      currentMinutesCount = 0;
+      clearInterval(interval);
+      currentSecondsCount = 0;
+      seconds_circle();
+      audio.play();
+      minutes_div.innerHTML = "Break";
+      colon_div.innerHTML = ' ';
+      seconds_div.innerHTML = "Time!";
+      minus.disabled = true;
+      trigger.innerHTML = '&#9658;';
+      trigger.disabled = true;
+    }
 
 
-
-
+  }, 1000);
 }
 
 
@@ -252,6 +313,8 @@ function run(){
         minus.disabled = true;
         trigger.innerHTML = '&#9658;';
         trigger.disabled = true;
+
+        setTimeout("runAfterBreak()", 3000);
     }
 
 
