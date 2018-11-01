@@ -17,14 +17,14 @@ var minute_stroke = document.querySelector('.minutes-radial-progress-cover');
 
 console.log(minute_stroke);
 
-minute_stroke.style.stroke = "#af111c";
+minute_stroke.style.stroke = "#00FF00";
 
 work_button.onclick = changeProgressBarColor;
 break_button.onclick = changeProgressBarColor;
 
 function changeProgressBarColor() {
   if (work_button.checked) {
-    minute_stroke.style.stroke = "#af111c"; // red
+    minute_stroke.style.stroke = "#00FF00"; // lime green
   } else if (break_button.checked) {
     minute_stroke.style.stroke = "#00CED1"; // blue
   }
