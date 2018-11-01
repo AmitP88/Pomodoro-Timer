@@ -117,6 +117,9 @@ function runAfterWork(){
   break_button.checked = true;
   minute_stroke.style.stroke = "#00CED1"; // blue
   reset_timer();
+  clicks = 0;
+  clicked();
+  clearInterval(interval);
 
   interval = setInterval(function(){
 
