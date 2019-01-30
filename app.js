@@ -1,28 +1,25 @@
-var trigger = document.getElementById("trigger");
-var countdown = document.getElementById("countdown");
-var minutes_div = document.getElementById("minutes");
-var colon_div = document.getElementById("colon");
-var seconds_div = document.getElementById("seconds");
-var reset = document.getElementById("reset");
-var add = document.getElementById("add");
-var minus = document.getElementById("minus");
-var minutes = 60;
-var seconds = 0;
-var clicks = 0;
-var interval;
-var audio = new Audio('analog-watch-alarm_daniel-simion.mp3');
-var work_button = document.getElementById('choice1');
-var break_button = document.getElementById('choice2');
-var minute_stroke = document.querySelector('.minutes-radial-progress-cover');
+let trigger = document.getElementById("trigger");
+let countdown = document.getElementById("countdown");
+let minutes_div = document.getElementById("minutes");
+let colon_div = document.getElementById("colon");
+let seconds_div = document.getElementById("seconds");
+let reset = document.getElementById("reset");
+let add = document.getElementById("add");
+let minus = document.getElementById("minus");
+let minutes = 60;
+let seconds = 0;
+let clicks = 0;
+let interval;
+let audio = new Audio('analog-watch-alarm_daniel-simion.mp3');
+let work_button = document.getElementById('choice1');
+let break_button = document.getElementById('choice2');
+let minute_stroke = document.querySelector('.minutes-radial-progress-cover');
 
 console.log(minute_stroke);
 
 minute_stroke.style.stroke = "#00FF00";
 
-work_button.onclick = changeProgressBarColor;
-break_button.onclick = changeProgressBarColor;
-
-function changeProgressBarColor() {
+const changeProgressBarColor = () => {
   if (work_button.checked) {
     minute_stroke.style.stroke = "#00FF00"; // lime green
   } else if (break_button.checked) {
@@ -30,15 +27,18 @@ function changeProgressBarColor() {
   }
 }
 
-function stop_alarm() {
+work_button.onclick = changeProgressBarColor;
+break_button.onclick = changeProgressBarColor;
+
+const stop_alarm = () => {
   audio.pause();
 }
 
 // minutes countdown circle setup
-var minutes_radius = 10.5
+let minutes_radius = 10.5
 minutes_circumference = 2 * minutes_radius * Math.PI;
 
-var minutes_els = document.querySelectorAll('.minutes');
+let minutes_els = document.querySelectorAll('.minutes');
 Array.prototype.forEach.call(minutes_els, function (minutes_el)  {
   minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
   minutes_el.setAttribute('r', minutes_radius + 'em');
@@ -46,16 +46,16 @@ Array.prototype.forEach.call(minutes_els, function (minutes_el)  {
 
 document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
 
-var minutes_circle_time = 60 - minutes;
+let minutes_circle_time = 60 - minutes;
 
-var currentMinutesCount = minutes_circle_time;
+let currentMinutesCount = minutes_circle_time;
 maxMinutesCount = 60;
 
 // seconds countdown circle setup
-var seconds_radius = 10,
+let seconds_radius = 10,
 seconds_circumference = 2 * seconds_radius * Math.PI;
 
-var seconds_els = document.querySelectorAll('.seconds');
+let seconds_els = document.querySelectorAll('.seconds');
 Array.prototype.forEach.call(seconds_els, function (seconds_el) {
   seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
   seconds_el.setAttribute('r', seconds_radius + 'em');
@@ -63,7 +63,7 @@ Array.prototype.forEach.call(seconds_els, function (seconds_el) {
 
 document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
 
-var currentSecondsCount = 1, 
+let currentSecondsCount = 1, 
 maxSecondsCount = 60;
 
 // For display purposes, adds leading zeros if either minutes or seconds are below 10
@@ -79,8 +79,8 @@ if(seconds < 10){
   seconds_div.innerHTML = seconds;  
 }
 
-// Clicked - to increment clicks variable
-function clicked(){
+// Clicked - to increment clicks letiable
+const clicked = () => {
   clicks++;
   // check to see if number of clicks are even or odd
   if(clicks % 2 == 0)/* number of clicks is even */{
@@ -94,17 +94,17 @@ function clicked(){
   } 
 }
 
-function seconds_circle(){
+const seconds_circle = () => {
     // decrements seconds circle for each second counted down
-    var seconds_offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
+    let seconds_offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
     console.log(currentSecondsCount, seconds_offset);
     document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', seconds_offset);
     currentSecondsCount++;  
 }
 
-function minutes_circle() {
+const minutes_circle = () => {
     // decrements minutes circle for each minute counted down
-    var minutes_offset = -(minutes_circumference / maxMinutesCount) * currentMinutesCount + 'em';
+    let minutes_offset = -(minutes_circumference / maxMinutesCount) * currentMinutesCount + 'em';
     console.log(currentMinutesCount, minutes_offset);
     document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);  
 }
@@ -112,7 +112,7 @@ function minutes_circle() {
 minutes_circle(); // sets minutes circle to default minutes
 
 // runAfterWork - if work timer runs out, switches to break timer, resets timer, and countsdown
-function runAfterWork(){
+const runAfterWork = () => {
   stop_alarm();
   break_button.checked = true;
   minute_stroke.style.stroke = "#00CED1"; // blue
@@ -121,7 +121,7 @@ function runAfterWork(){
   clicked();
   clearInterval(interval);
 
-  interval = setInterval(function(){
+  interval = setInterval(() => {
 
     seconds_circle();
     minutes_circle();
@@ -172,13 +172,10 @@ function runAfterWork(){
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
     }
-
-
   }, 1000);
-
 }
 
-function runAfterBreak(){
+const runAfterBreak = () => {
   stop_alarm();
   work_button.checked = true;
   minute_stroke.style.stroke = "#00FF00"; // lime green
@@ -187,7 +184,7 @@ function runAfterBreak(){
   clicked();
   clearInterval(interval);
 
-  interval = setInterval(function(){
+  interval = setInterval(() => {
 
     seconds_circle();
     minutes_circle();
@@ -238,16 +235,12 @@ function runAfterBreak(){
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
     }
-
-
   }, 1000);
 }
 
-
-
 // Run - if # of clicks is odd
-function run(){
-  interval = setInterval(function(){
+const run = () => {
+  interval = setInterval(() => {
 
     seconds_circle();
     minutes_circle();
@@ -299,8 +292,7 @@ function run(){
       trigger.disabled = true;
 
       setTimeout("runAfterWork()", 3000);
-      
-
+    
     } else if ((minutes === 0 && seconds < 0)&&(break_button.checked)){
         currentMinutesCount = 0;
         clearInterval(interval);
@@ -316,18 +308,11 @@ function run(){
 
         setTimeout("runAfterBreak()", 3000);
     }
-
-
-
-
-
   },1000);
 }
 
-
-
 // Increment - allows the user to increase the number of minutes on timer (up to 60 minutes max)
-function increment(){
+const increment = () =>{
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
@@ -372,38 +357,38 @@ function increment(){
   }
 }
 
-var tid = 0;
-var speed = 220;
+let tid = 0;
+let speed = 220;
 
-add.addEventListener("mousedown", function() {
+add.addEventListener("mousedown", () => {
   toggleOnIncrement();
 })
 
-add.addEventListener("mouseup", function() {
+add.addEventListener("mouseup", () => {
   toggleOff();
 })
 
-minus.addEventListener("mousedown", function() {
+minus.addEventListener("mousedown", () => {
   toggleOnDecrement();
 })
 
-minus.addEventListener("mouseup", function() {
+minus.addEventListener("mouseup", () => {
   toggleOff();
 })
 
-function toggleOnDecrement(){
+const toggleOnDecrement = () => {
   if(tid==0){
     tid=setInterval('decrement()',speed);
   }
 }
   
-function toggleOnIncrement(){
+const toggleOnIncrement = () => {
   if(tid==0){
     tid=setInterval('increment()',speed);
   }
 }
 
-function toggleOff(){
+const toggleOff = () => {
   if(tid!=0){
     clearInterval(tid);
     tid=0;
@@ -411,7 +396,7 @@ function toggleOff(){
 }
 
 // Decrement - allows the user to decrease the number of minutes (down to a minimum of 0)
-function decrement(){
+const decrement = () => {
   trigger.innerHTML = '&#9658;';
   // resets the number of clicks to zero (this prevents having to click the start button twice after incrementing the minutes)
   clicks = 0;
@@ -444,7 +429,6 @@ function decrement(){
     minutes_div.innerHTML = minutes;
   }
   
-    
   if(minutes === 0){
     toggleOff();
     minus.disabled = true;
@@ -460,11 +444,10 @@ function decrement(){
     seconds_div.innerHTML = '0' + seconds;
     clearInterval(interval);
   }
-  
 }
 
 // Reset - resets timer back to default state; seconds go back to default value
-function reset_timer(){
+const reset_timer = () => {
   tid = 0;
   if(minutes === 60){
     add.disabled = false;
