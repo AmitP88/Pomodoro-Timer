@@ -168,6 +168,13 @@ minutes_circle(); // sets minutes circle to default minutes
 // runWorkTimer - if # of clicks is odd && work button is checked (see "clicked" function) 
 const runWorkTimer = () => {
   interval = setInterval(() => {
+    stop_alarm();
+    work_button.checked = true;
+    minute_stroke.style.stroke = "#00FF00"; // lime green
+    colon_div.innerHTML = ':';
+    trigger.disabled = false;
+    minus.disabled = false;
+    trigger.innerHTML = '&#10074;&#10074;';
 
     seconds_circle();
     minutes_circle();
@@ -205,7 +212,7 @@ const runWorkTimer = () => {
     // counts down seconds and adds a leading zero when seconds fall below 10
     seconds_div.innerHTML = ('0' + --work_seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
-    if((work_minutes === 0 && work_seconds < 0)&&(work_button.checked)){
+    if(work_minutes === 0 && work_seconds < 0){
       currentWorkMinutesCount = 0;
       clearInterval(interval);
       currentWorkSecondsCount = 0;
@@ -219,14 +226,21 @@ const runWorkTimer = () => {
       trigger.disabled = true;
 
       setTimeout("runBreakTimer()", 3000);
-    
     }
   },1000);
 }
 
 // runBreakTimer - if # of clicks is odd && break button is checked (see "clicked" function) 
 const runBreakTimer = () => {
+
   interval = setInterval(() => {
+    stop_alarm();
+    break_button.checked = true;
+    minute_stroke.style.stroke = "#00CED1"; // blue
+    colon_div.innerHTML = ':';
+    trigger.disabled = false;
+    minus.disabled = false;
+    trigger.innerHTML = '&#10074;&#10074;';
 
     seconds_circle();
     minutes_circle();
@@ -270,9 +284,9 @@ const runBreakTimer = () => {
       currentBreakSecondsCount = 0;
       seconds_circle();
       audio.play();
-      minutes_div.innerHTML = "Break";
+      minutes_div.innerHTML = "Begin";
       colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "Time!";
+      seconds_div.innerHTML = "Work";
       minus.disabled = true;
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
