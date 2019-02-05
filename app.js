@@ -100,7 +100,15 @@ const ChangeTimers = () => {
   if (work_button.checked) {
     // Change minute circle color to green
     minute_stroke.style.stroke = "#00FF00"; // lime green
+    // display current work time setting
+    minutes_div.innerHTML = work_minutes;
+    minutes_circle();
 
+    work_seconds = 0;
+    currentWorkSecondsCount = 0;
+    seconds_div.innerHTML = '0' + work_seconds;
+    seconds_circle();
+    
     // stops timer
     clicks = -1;
     clearInterval(interval);
@@ -109,6 +117,14 @@ const ChangeTimers = () => {
   } else if (break_button.checked) {
     // Change minute circle color to blue
     minute_stroke.style.stroke = "#00CED1"; // blue
+    // display current break time setting
+    minutes_div.innerHTML = break_minutes;
+    minutes_circle();
+
+    break_seconds = 0;
+    currentBreakSecondsCount = 0;
+    seconds_div.innerHTML = '0' + break_seconds;
+    seconds_circle();
     
     // stops timer
     clicks = -1;
@@ -148,133 +164,6 @@ const minutes_circle = () => {
 
 minutes_circle(); // sets minutes circle to default minutes
 
-// runAfterWork - if work timer runs out, switches to break timer, resets timer, and countsdown
-const runAfterWork = () => {
-  stop_alarm();
-  break_button.checked = true;
-  minute_stroke.style.stroke = "#00CED1"; // blue
-  reset_timer();
-  clicks = 0;
-  clicked();
-  clearInterval(interval);
-
-  interval = setInterval(() => {
-
-    seconds_circle();
-    minutes_circle();
-
-    // if Break timer has only minutes and 0 seconds displayed (example: 20:00)
-    if(break_minutes > 10 && break_seconds == 0){
-      minutes_div.innerHTML = --break_minutes;
-      currentBreakMinutesCount++;
-      break_seconds = 60;
-      seconds_div.innerHTML = break_seconds;
-    }
-
-    // if Break timer is below 60:00, enables (+) button
-    if(break_minutes <= 60 && break_seconds <= 60){
-      add.disabled = false;
-    }    
-    // if Break timer has minutes displayed that fall between 1 and 10, adds a leading zero to minutes (example: 05:00) 
-    if(break_minutes > 1 && break_minutes <= 10 && break_seconds == 0){
-      minutes_div.innerHTML = '0' + --break_minutes;
-      currentBreakMinutesCount = currentBreakMinutesCount + 1;
-      break_seconds = 60;
-      seconds_div.innerHTML = break_seconds;
-    }
-
-    // if Break timer is on final minute (01:00)
-    if(break_minutes == 1 && break_seconds == 0){
-      break_minutes = 0;
-      minutes_div.innerHTML = '0' + break_minutes;
-      currentBreakMinutesCount++;
-      break_seconds = 60;
-      currentBreakSecondsCount = 1;
-      currentBreakSecondsCount++;
-      seconds_div.innerHTML = break_seconds;
-    }
-    // counts down seconds and adds a leading zero when seconds fall below 10
-    seconds_div.innerHTML = ('0' + --break_seconds).slice(-2);
-    // if Break timer runs out (reaches 00:00), displays "time's up" message on clock
-    if(break_minutes === 0 && break_seconds < 0){
-      currentBreakMinutesCount = 0;
-      clearInterval(interval);
-      currentBreakSecondsCount = 0;
-      seconds_circle();
-      audio.play();
-      minutes_div.innerHTML = "Begin";
-      colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "Work";
-      minus.disabled = true;
-      trigger.innerHTML = '&#9658;';
-      trigger.disabled = true;
-    }
-  }, 1000);
-}
-
-// runAfterBreak - if Break timer runs out, switches to Work timer, resets timer, and countsdown
-const runAfterBreak = () => {
-  stop_alarm();
-  work_button.checked = true;
-  minute_stroke.style.stroke = "#00FF00"; // lime green
-  reset_timer();
-  clicks = 0;
-  clicked();
-  clearInterval(interval);
-
-  interval = setInterval(() => {
-
-    seconds_circle();
-    minutes_circle();
-
-    // if Work timer has only minutes and 0 seconds displayed (example: 20:00)
-    if(work_minutes > 10 && work_seconds == 0){
-      minutes_div.innerHTML = --work_minutes;
-      currentWorkMinutesCount++;
-      work_seconds = 60;
-      seconds_div.innerHTML = work_seconds;
-    }
-
-    // if Work timer is below 60:00, enables (+) button
-    if(work_minutes <= 60 && work_seconds <= 60){
-      add.disabled = false;
-    }    
-    // if Work timer has minutes displayed that fall between 1 and 10, adds a leading zero to minutes (example: 05:00) 
-    if(work_minutes > 1 && work_minutes <= 10 && work_seconds == 0){
-      minutes_div.innerHTML = '0' + --work_minutes;
-      currentWorkMinutesCount = currentWorkMinutesCount + 1;
-      work_seconds = 60;
-      seconds_div.innerHTML = work_seconds;
-    }
-
-    // if Work timer is on final minute (01:00)
-    if(work_minutes == 1 && work_seconds == 0){
-      work_minutes = 0;
-      minutes_div.innerHTML = '0' + work_minutes;
-      currentWorkMinutesCount++;
-      work_seconds = 60;
-      currentWorkSecondsCount = 1;
-      currentWorkSecondsCount++;
-      seconds_div.innerHTML = work_seconds;
-    }
-    // counts down seconds and adds a leading zero when seconds fall below 10
-    seconds_div.innerHTML = ('0' + --work_seconds).slice(-2);
-    // if timer runs out (reaches 00:00), displays "time's up" message on clock
-    if(work_minutes === 0 && work_seconds < 0){
-      currentWorkMinutesCount = 0;
-      clearInterval(interval);
-      currentWorkSecondsCount = 0;
-      seconds_circle();
-      audio.play();
-      minutes_div.innerHTML = "Break";
-      colon_div.innerHTML = ' ';
-      seconds_div.innerHTML = "Time!";
-      minus.disabled = true;
-      trigger.innerHTML = '&#9658;';
-      trigger.disabled = true;
-    }
-  }, 1000);
-}
 
 // runWorkTimer - if # of clicks is odd && work button is checked (see "clicked" function) 
 const runWorkTimer = () => {
@@ -329,7 +218,7 @@ const runWorkTimer = () => {
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
 
-      setTimeout("runAfterWork()", 3000);
+      setTimeout("runBreakTimer()", 3000);
     
     }
   },1000);
@@ -388,7 +277,7 @@ const runBreakTimer = () => {
       trigger.innerHTML = '&#9658;';
       trigger.disabled = true;
 
-      setTimeout("runAfterBreak()", 3000);
+      setTimeout("runWorkTimer()", 3000);
     
     }
   },1000);
