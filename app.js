@@ -40,6 +40,7 @@ const changeProgressBarColor = () => {
     minute_stroke.style.stroke = "#00FF00"; // lime green
 
     // stops timer
+    clicks = -1;
     clearInterval(interval);
     clicked();
 
@@ -48,6 +49,7 @@ const changeProgressBarColor = () => {
     minute_stroke.style.stroke = "#00CED1"; // blue
     
     // stops timer
+    clicks = -1;
     clearInterval(interval);
     clicked();
 
