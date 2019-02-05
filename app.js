@@ -15,69 +15,8 @@ let work_button = document.getElementById('choice1');
 let break_button = document.getElementById('choice2');
 let minute_stroke = document.querySelector('.minutes-radial-progress-cover');
 
-console.log(minute_stroke);
-
+// Display green minute circle on initial page load
 minute_stroke.style.stroke = "#00FF00";
-
-const changeProgressBarColor = () => {
-  if (work_button.checked) {
-    minute_stroke.style.stroke = "#00FF00"; // lime green
-  } else if (break_button.checked) {
-    minute_stroke.style.stroke = "#00CED1"; // blue
-  }
-}
-
-work_button.onclick = changeProgressBarColor;
-break_button.onclick = changeProgressBarColor;
-
-const stop_alarm = () => {
-  audio.pause();
-}
-
-// minutes countdown circle setup
-let minutes_radius = 10.5
-minutes_circumference = 2 * minutes_radius * Math.PI;
-
-let minutes_els = document.querySelectorAll('.minutes');
-Array.prototype.forEach.call(minutes_els, function (minutes_el)  {
-  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
-  minutes_el.setAttribute('r', minutes_radius + 'em');
-});
-
-document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
-
-let minutes_circle_time = 60 - minutes;
-
-let currentMinutesCount = minutes_circle_time;
-maxMinutesCount = 60;
-
-// seconds countdown circle setup
-let seconds_radius = 10,
-seconds_circumference = 2 * seconds_radius * Math.PI;
-
-let seconds_els = document.querySelectorAll('.seconds');
-Array.prototype.forEach.call(seconds_els, function (seconds_el) {
-  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
-  seconds_el.setAttribute('r', seconds_radius + 'em');
-});
-
-document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
-
-let currentSecondsCount = 1, 
-maxSecondsCount = 60;
-
-// For display purposes, adds leading zeros if either minutes or seconds are below 10
-if(minutes < 10){
-  minutes_div.innerHTML = '0' + minutes;
-} else {
-  minutes_div.innerHTML = minutes;  
-}
-
-if(seconds < 10){
-  seconds_div.innerHTML = '0' + seconds;
-} else {
-  seconds_div.innerHTML = seconds;  
-}
 
 // Clicked - to increment clicks letiable
 const clicked = () => {
@@ -94,10 +33,74 @@ const clicked = () => {
   } 
 }
 
+// May change to - ChangeTimers (a function that changes between Work and Break timers)
+const changeProgressBarColor = () => {
+  if (work_button.checked) {
+    // Change minute circle color to green
+    minute_stroke.style.stroke = "#00FF00"; // lime green
+
+    // stops timer
+    clearInterval(interval);
+    clicked();
+
+  } else if (break_button.checked) {
+    // Change minute circle color to blue
+    minute_stroke.style.stroke = "#00CED1"; // blue
+    
+    // stops timer
+    clearInterval(interval);
+    clicked();
+
+  }
+}
+
+work_button.onclick = changeProgressBarColor;
+break_button.onclick = changeProgressBarColor;
+
+const stop_alarm = () => audio.pause();
+
+
+// minutes countdown circle setup
+let minutes_radius = 10.5
+minutes_circumference = 2 * minutes_radius * Math.PI;
+
+let minutes_els = document.querySelectorAll('.minutes');
+Array.prototype.forEach.call(minutes_els, (minutes_el) => {
+  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
+  minutes_el.setAttribute('r', minutes_radius + 'em');
+});
+
+document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
+
+let minutes_circle_time = 60 - minutes;
+
+let currentMinutesCount = minutes_circle_time;
+maxMinutesCount = 60;
+
+// seconds countdown circle setup
+let seconds_radius = 10,
+seconds_circumference = 2 * seconds_radius * Math.PI;
+
+let seconds_els = document.querySelectorAll('.seconds');
+Array.prototype.forEach.call(seconds_els, (seconds_el) => {
+  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+  seconds_el.setAttribute('r', seconds_radius + 'em');
+});
+
+document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
+
+let currentSecondsCount = 1, 
+maxSecondsCount = 60;
+
+// For display purposes, adds leading zeros if either minutes or seconds are below 10
+minutes < 10 ? (minutes_div.innerHTML = '0' + minutes) : (minutes_div.innerHTML = minutes)
+seconds < 10 ? (seconds_div.innerHTML = '0' + seconds) : (seconds_div.innerHTML = seconds)
+
+
+
 const seconds_circle = () => {
     // decrements seconds circle for each second counted down
     let seconds_offset = -(seconds_circumference / maxSecondsCount) * currentSecondsCount + 'em';
-    console.log(currentSecondsCount, seconds_offset);
     document.querySelector('.seconds-radial-progress-cover').setAttribute('stroke-dashoffset', seconds_offset);
     currentSecondsCount++;  
 }
@@ -105,7 +108,6 @@ const seconds_circle = () => {
 const minutes_circle = () => {
     // decrements minutes circle for each minute counted down
     let minutes_offset = -(minutes_circumference / maxMinutesCount) * currentMinutesCount + 'em';
-    console.log(currentMinutesCount, minutes_offset);
     document.querySelector('.minutes-radial-progress-cover').setAttribute('stroke-dashoffset', minutes_offset);  
 }
 
@@ -147,7 +149,7 @@ const runAfterWork = () => {
     }
 
     // if timer is on final minute (01:00)
-    if( minutes == 1 && seconds == 0 ){
+    if(minutes == 1 && seconds == 0){
       minutes = 0;
       minutes_div.innerHTML = '0' + minutes;
       currentMinutesCount++;
@@ -159,7 +161,7 @@ const runAfterWork = () => {
     // counts down seconds and adds a leading zero when seconds fall below 10
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
-    if( minutes === 0 && seconds < 0 ){
+    if(minutes === 0 && seconds < 0){
       currentMinutesCount = 0;
       clearInterval(interval);
       currentSecondsCount = 0;
@@ -210,7 +212,7 @@ const runAfterBreak = () => {
     }
 
     // if timer is on final minute (01:00)
-    if( minutes == 1 && seconds == 0 ){
+    if(minutes == 1 && seconds == 0){
       minutes = 0;
       minutes_div.innerHTML = '0' + minutes;
       currentMinutesCount++;
@@ -222,7 +224,7 @@ const runAfterBreak = () => {
     // counts down seconds and adds a leading zero when seconds fall below 10
     seconds_div.innerHTML = ('0' + --seconds).slice(-2);
     // if timer runs out (reaches 00:00), displays "time's up" message on clock
-    if( minutes === 0 && seconds < 0 ){
+    if(minutes === 0 && seconds < 0){
       currentMinutesCount = 0;
       clearInterval(interval);
       currentSecondsCount = 0;
@@ -266,7 +268,7 @@ const run = () => {
     }
 
     // if timer is on final minute (01:00)
-    if( minutes == 1 && seconds == 0 ){
+    if(minutes == 1 && seconds == 0){
       minutes = 0;
       minutes_div.innerHTML = '0' + minutes;
       currentMinutesCount++;
