@@ -6,17 +6,51 @@ let seconds_div = document.getElementById("seconds");
 let reset = document.getElementById("reset");
 let add = document.getElementById("add");
 let minus = document.getElementById("minus");
-let minutes = 60;
-let seconds = 0;
-let clicks = 0;
-let interval;
 let audio = new Audio('analog-watch-alarm_daniel-simion.mp3');
 let work_button = document.getElementById('choice1');
 let break_button = document.getElementById('choice2');
 let minute_stroke = document.querySelector('.minutes-radial-progress-cover');
 
-// Display green minute circle on initial page load
+let minutes = 60;
+let seconds = 0;
+
+let clicks = 0;
+let interval;
+
+
+/* MINUTE CIRCLE DISPLAY SETUP */
 minute_stroke.style.stroke = "#00FF00";
+let minutes_radius = 10.5
+minutes_circumference = 2 * minutes_radius * Math.PI;
+let minutes_els = document.querySelectorAll('.minutes');
+Array.prototype.forEach.call(minutes_els, (minutes_el) => {
+  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
+  minutes_el.setAttribute('r', minutes_radius + 'em');
+});
+document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
+let minutes_circle_time = 60 - minutes;
+let currentMinutesCount = minutes_circle_time;
+maxMinutesCount = 60;
+
+
+
+/* SECONDS CIRCLE DISPLAY SETUP */
+let seconds_radius = 10,
+seconds_circumference = 2 * seconds_radius * Math.PI;
+let seconds_els = document.querySelectorAll('.seconds');
+Array.prototype.forEach.call(seconds_els, (seconds_el) => {
+  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+  seconds_el.setAttribute('r', seconds_radius + 'em');
+});
+document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
+let currentSecondsCount = 1, 
+maxSecondsCount = 60;
+
+// For display purposes, adds leading zeros if either minutes or seconds are below 10
+minutes < 10 ? (minutes_div.innerHTML = '0' + minutes) : (minutes_div.innerHTML = minutes)
+seconds < 10 ? (seconds_div.innerHTML = '0' + seconds) : (seconds_div.innerHTML = seconds)
+
+
 
 // Clicked - to increment clicks letiable
 const clicked = () => {
@@ -33,8 +67,8 @@ const clicked = () => {
   } 
 }
 
-// May change to - ChangeTimers (a function that changes between Work and Break timers)
-const changeProgressBarColor = () => {
+// ChangeTimers - A function that changes between Work and Break timers
+const ChangeTimers = () => {
   if (work_button.checked) {
     // Change minute circle color to green
     minute_stroke.style.stroke = "#00FF00"; // lime green
@@ -56,47 +90,15 @@ const changeProgressBarColor = () => {
   }
 }
 
-work_button.onclick = changeProgressBarColor;
-break_button.onclick = changeProgressBarColor;
+work_button.onclick = ChangeTimers;
+break_button.onclick = ChangeTimers;
 
 const stop_alarm = () => audio.pause();
 
 
-// minutes countdown circle setup
-let minutes_radius = 10.5
-minutes_circumference = 2 * minutes_radius * Math.PI;
 
-let minutes_els = document.querySelectorAll('.minutes');
-Array.prototype.forEach.call(minutes_els, (minutes_el) => {
-  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
-  minutes_el.setAttribute('r', minutes_radius + 'em');
-});
 
-document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
 
-let minutes_circle_time = 60 - minutes;
-
-let currentMinutesCount = minutes_circle_time;
-maxMinutesCount = 60;
-
-// seconds countdown circle setup
-let seconds_radius = 10,
-seconds_circumference = 2 * seconds_radius * Math.PI;
-
-let seconds_els = document.querySelectorAll('.seconds');
-Array.prototype.forEach.call(seconds_els, (seconds_el) => {
-  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
-  seconds_el.setAttribute('r', seconds_radius + 'em');
-});
-
-document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
-
-let currentSecondsCount = 1, 
-maxSecondsCount = 60;
-
-// For display purposes, adds leading zeros if either minutes or seconds are below 10
-minutes < 10 ? (minutes_div.innerHTML = '0' + minutes) : (minutes_div.innerHTML = minutes)
-seconds < 10 ? (seconds_div.innerHTML = '0' + seconds) : (seconds_div.innerHTML = seconds)
 
 
 
