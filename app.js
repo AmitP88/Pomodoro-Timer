@@ -17,42 +17,47 @@ let seconds = 0;
 let clicks = 0;
 let interval;
 
-
-/* MINUTE CIRCLE DISPLAY SETUP */
-minute_stroke.style.stroke = "#00FF00";
 let minutes_radius = 10.5
 minutes_circumference = 2 * minutes_radius * Math.PI;
-let minutes_els = document.querySelectorAll('.minutes');
-Array.prototype.forEach.call(minutes_els, (minutes_el) => {
-  minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
-  minutes_el.setAttribute('r', minutes_radius + 'em');
-});
-document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
+
+let seconds_radius = 10,
+seconds_circumference = 2 * seconds_radius * Math.PI;
+
 let minutes_circle_time = 60 - minutes;
 let currentMinutesCount = minutes_circle_time;
 maxMinutesCount = 60;
 
-
-
-/* SECONDS CIRCLE DISPLAY SETUP */
-let seconds_radius = 10,
-seconds_circumference = 2 * seconds_radius * Math.PI;
-let seconds_els = document.querySelectorAll('.seconds');
-Array.prototype.forEach.call(seconds_els, (seconds_el) => {
-  seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
-  seconds_el.setAttribute('r', seconds_radius + 'em');
-});
-document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
 let currentSecondsCount = 1, 
 maxSecondsCount = 60;
 
-// For display purposes, adds leading zeros if either minutes or seconds are below 10
-minutes < 10 ? (minutes_div.innerHTML = '0' + minutes) : (minutes_div.innerHTML = minutes)
-seconds < 10 ? (seconds_div.innerHTML = '0' + seconds) : (seconds_div.innerHTML = seconds)
+const displayTimer = () => {
+  /* MINUTE CIRCLE DISPLAY SETUP */
+  ChangeTimers();
+
+  let minutes_els = document.querySelectorAll('.minutes');
+  Array.prototype.forEach.call(minutes_els, (minutes_el) => {
+    minutes_el.setAttribute('stroke-dasharray', minutes_circumference + 'em');
+    minutes_el.setAttribute('r', minutes_radius + 'em');
+  });
+  document.querySelector('.minutes-radial-progress-center').setAttribute('r', (minutes_radius - 0.01 + 'em'));
 
 
+  /* SECONDS CIRCLE DISPLAY SETUP */
 
-// Clicked - to increment clicks letiable
+  let seconds_els = document.querySelectorAll('.seconds');
+  Array.prototype.forEach.call(seconds_els, (seconds_el) => {
+    seconds_el.setAttribute('stroke-dasharray', seconds_circumference + 'em');
+    seconds_el.setAttribute('r', seconds_radius + 'em');
+  });
+  document.querySelector('.seconds-radial-progress-center').setAttribute('r', (seconds_radius - 0.01 + 'em'));
+
+
+  // For display purposes, adds leading zeros if either minutes or seconds are below 10
+  minutes < 10 ? (minutes_div.innerHTML = '0' + minutes) : (minutes_div.innerHTML = minutes)
+  seconds < 10 ? (seconds_div.innerHTML = '0' + seconds) : (seconds_div.innerHTML = seconds)  
+}
+
+// Clicked - to increment clicks variable
 const clicked = () => {
   clicks++;
   // check to see if number of clicks are even or odd
@@ -94,13 +99,6 @@ work_button.onclick = ChangeTimers;
 break_button.onclick = ChangeTimers;
 
 const stop_alarm = () => audio.pause();
-
-
-
-
-
-
-
 
 const seconds_circle = () => {
     // decrements seconds circle for each second counted down
