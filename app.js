@@ -98,6 +98,10 @@ const clicked = () => {
 // ChangeTimers - A function that changes between Work and Break timers
 const ChangeTimers = () => {
   if (work_button.checked) {
+    // resets timer if it was previously at 00:00
+    if(work_minutes <= 0 & work_seconds <= 0){
+      reset_timer();
+    }
     // Change minute circle color to green
     minute_stroke.style.stroke = "#00FF00"; // lime green
     // display current work time setting
@@ -124,6 +128,10 @@ const ChangeTimers = () => {
     clicked();
 
   } else if (break_button.checked) {
+    // resets timer if it was previously at 00:00
+    if(break_minutes <= 0 & break_seconds <= 0){
+      reset_timer();
+    }
     // Change minute circle color to blue
     minute_stroke.style.stroke = "#00CED1"; // blue
     // display current break time setting
@@ -245,6 +253,7 @@ const runWorkTimer = () => {
       setTimeout("runBreakTimer()", 3000);
     }
   },1000);
+
 }
 
 // runBreakTimer - if # of clicks is odd && break button is checked (see "clicked" function) 
