@@ -99,7 +99,7 @@ const clicked = () => {
 const ChangeTimers = () => {
   if (work_button.checked) {
     // resets timer if it was previously at 00:00
-    if(work_minutes <= 0 & work_seconds <= 0){
+    if(work_minutes <= 0 && work_seconds <= 0){
       reset_timer();
     }
     // Change minute circle color to green
@@ -129,7 +129,7 @@ const ChangeTimers = () => {
 
   } else if (break_button.checked) {
     // resets timer if it was previously at 00:00
-    if(break_minutes <= 0 & break_seconds <= 0){
+    if(break_minutes <= 0 && break_seconds <= 0){
       reset_timer();
     }
     // Change minute circle color to blue
