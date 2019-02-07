@@ -101,7 +101,14 @@ const ChangeTimers = () => {
     // Change minute circle color to green
     minute_stroke.style.stroke = "#00FF00"; // lime green
     // display current work time setting
-    minutes_div.innerHTML = work_minutes;
+    if(work_minutes < 60 && work_seconds < 60 && work_seconds > 0){
+      minutes_div.innerHTML = work_minutes++;
+      work_minutes_circle_time = 60 - work_minutes;
+      currentWorkMinutesCount = work_minutes_circle_time;
+    } else {
+      minutes_div.innerHTML = work_minutes;
+    }
+
     minutes_circle();
 
     work_seconds = 0;
@@ -120,7 +127,14 @@ const ChangeTimers = () => {
     // Change minute circle color to blue
     minute_stroke.style.stroke = "#00CED1"; // blue
     // display current break time setting
-    minutes_div.innerHTML = break_minutes;
+    if(break_minutes < 60 && break_seconds < 60 && break_seconds > 0){
+      minutes_div.innerHTML = break_minutes++;
+      break_minutes_circle_time = 60 - break_minutes;
+      currentBreakMinutesCount = break_minutes_circle_time;
+    } else {
+      minutes_div.innerHTML = break_minutes;      
+    }
+
     minutes_circle();
 
     break_seconds = 0;
