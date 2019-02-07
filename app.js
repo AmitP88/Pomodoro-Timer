@@ -106,7 +106,9 @@ const ChangeTimers = () => {
 
     work_seconds = 0;
     currentWorkSecondsCount = 0;
-    seconds_div.innerHTML = '0' + work_seconds;
+      // For display purposes, adds leading zeros if either minutes or seconds are below 10  
+    work_minutes < 10 ? (minutes_div.innerHTML = '0' + work_minutes) : (minutes_div.innerHTML = work_minutes)
+    work_seconds < 10 ? (seconds_div.innerHTML = '0' + work_seconds) : (seconds_div.innerHTML = work_seconds)
     seconds_circle();
     
     // stops timer
@@ -123,7 +125,8 @@ const ChangeTimers = () => {
 
     break_seconds = 0;
     currentBreakSecondsCount = 0;
-    seconds_div.innerHTML = '0' + break_seconds;
+    break_minutes < 10 ? (minutes_div.innerHTML = '0' + break_minutes) : (minutes_div.innerHTML = break_minutes)
+    break_seconds < 10 ? (seconds_div.innerHTML = '0' + break_seconds) : (seconds_div.innerHTML = break_seconds)
     seconds_circle();
     
     // stops timer
